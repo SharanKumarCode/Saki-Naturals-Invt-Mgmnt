@@ -1,9 +1,20 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch} from 'react-redux';
 
 import './products.scss';
 import editIcon from '../../../assets/edit_icon.png';
 import productImg from '../../../assets/Products/soap_1.jpg';
+
+const productDummydata = {
+        productID: 659843,
+        group: "Cream",
+        name: "Honey",
+        description: "Honey Flavoured Hair Cream 5ml",
+        price: 30,
+        instock: 100,
+        image: "../../../assets/Products/hair_cream.jpg"
+    }
+        
 
 const ProductsCard = (product) => {
     return (
@@ -26,7 +37,7 @@ const ProductsCard = (product) => {
                         <td className='product-card-stock column-6'>
                             {product.instock} pcs
                         </td>
-                        <td className='product-card-image column-7' style={{ backgroundImage: `url(${product.image})` }}>
+                        <td className='product-card-image column-7' style={{ backgroundImage: `url(${productImg})` }}>
                         </td>
                         <td className='product-card-edit column-8'>
                             <img className='edit-icon-img' src={editIcon} alt="edit icon" />
@@ -39,12 +50,17 @@ const ProductsCard = (product) => {
 export default function Products(){
 
     //Selector function to select data from store
-    const products = useSelector(state=>state.products);
+    const products = useSelector(state=>state.products.products);
+    const dispatch = useDispatch();
+
+    const onAddProductsHandler = () => {
+        dispatch({type:"product/addProduct", payload:productDummydata});
+    }
 
     return (
         <>  
             {/* Button to add produts */}
-            <button>
+            <button onClick={()=>onAddProductsHandler()}>
                 + &emsp; &emsp; ADD PRODUCTS
             </button>
             <table>
@@ -78,7 +94,7 @@ export default function Products(){
                 <tbody>
                     {
                         products.map((prod)=>{
-                            return(<ProductsCard {...prod} />)
+                            return(<ProductsCard {...prod} key={prod.productID} />)
                         })
                     }
                 </tbody>                

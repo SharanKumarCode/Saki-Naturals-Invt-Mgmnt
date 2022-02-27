@@ -1,4 +1,5 @@
 const { app, BrowserWindow, ipcMain } = require('electron');
+const { default: installExtension, REACT_DEVELOPER_TOOLS, REDUX_DEVTOOLS } = require('electron-devtools-installer');
 const path = require("path");
 const { initializeApp } = require('firebase/app');
 const { getFirestore, collection, getDocs, doc} = require('firebase/firestore/lite');
@@ -56,12 +57,19 @@ require("electron-reload")(__dirname, {
     electron: path.join(__dirname, "node_modules", ".bin", "electron")
 })
 
-// try {
-// 	require('electron-reloader')(module);
-// } catch {}
+app.whenReady().then(() => {
+    // const forceDownload = !!process.env.UPGRADE_EXTENSIONS;
+    // const extensions = [REACT_DEVELOPER_TOOLS, REDUX_DEVTOOLS];
 
-app.whenReady().then(createWindow);
+    // installExtension(
+    //   extensions,
+    //   {loadExtensionOptions: {allowFileAccess: true}, forceDownload: false}
+    // )
+    //     .then((name) => console.log(`Added Extension:  ${name}`))
+    //     .catch((err) => console.log('An error occurred: ', err));
+    createWindow();
+});
 
-// app.on('window-all-closed', function () {
-//     if (process.platform !== 'darwin') app.exit()
-//   })
+app.on('window-all-closed', function () {
+    if (process.platform !== 'darwin') app.exit()
+  })
