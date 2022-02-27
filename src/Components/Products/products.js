@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { useSelector, useDispatch} from 'react-redux';
 
 import AddEditProductsComponent from './addEditProductsComponent';
@@ -6,6 +6,7 @@ import AddEditProductsComponent from './addEditProductsComponent';
 import './products.scss';
 import editIcon from '../../../assets/edit_icon.png';
 import productImg from '../../../assets/Products/soap_1.jpg';
+import { Button } from '@mui/material';
 
 const productDummydata = {
         productID: 659843,
@@ -77,6 +78,29 @@ export default function Products(){
             })
         }
     }
+
+    const fetchDataCallback = (_, data) =>{
+        let temp = []
+        data.forEach(d => {
+            if(!products.some(e=>{
+                return e.productID === d.productID
+                })
+            ){
+                temp.push(d)                
+            }            
+        });
+        temp.forEach(f=>{
+            dispatch({type:"product/addProduct", payload:f});
+        })
+    }
+
+    const fetchProductsFirestoreData = ()=>{
+        electronApi.fetchFirestoreData(fetchDataCallback)
+    }
+
+    useEffect(()=>{
+        fetchProductsFirestoreData()
+    }, []);
 
     return (
         <>  

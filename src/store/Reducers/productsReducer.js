@@ -1,64 +1,36 @@
 const initialState = {
-    products: [
-                    {
-                        productID: 101254,
-                        group: "Soap",
-                        name: "Rose",
-                        description: "Rose flavour 5'' x 6'' x 2''",
-                        price: 30,
-                        instock: 100,
-                        image: "/assets/Products/soap_1.jpg"
-                    },
-                    {
-                        productID: 451284,
-                        group: "Soap",
-                        name: "Sandoor",
-                        description: "Sandoor flavour 6'' x 7'' x 3''",
-                        price: 30,
-                        instock: 100,
-                        image: "../../../assets/Products/soap_2.jpg"
-                    }
-                ]
+    products: []
 }
-
-// const productReducer = createSlice({
-//     name: "products",
-//     initialState,
-//     reducers: {
-//         addProducts(state, action){
-//             console.log(action);
-//             // state.push(action.payload)
-//             state.push({
-//                 productID: 659843,
-//                 group: "Cream",
-//                 name: "Honey",
-//                 description: "Honey Flavoured Hair Cream 5ml",
-//                 price: 30,
-//                 instock: 100,
-//                 image: "../../../assets/Products/hair_cream.jpg"
-//             })
-//         },
-//         removeProducts(state, action){
-//             state.filter((s)=>{
-//                 return s.productID !== action.payload
-//             })
-//         },
-//         updateProducts(state, action){
-//             state.filter((s)=>{
-//                 return s.productID !== action.payload.productID
-//             })
-//             state.push(action.payload)
-//         }
-//     }
-// })
 
 const productsReducer = (state = initialState, action)=>{
     switch (action.type) {
         case 'product/addProduct': {
-            return {
-              ...state,
-              products: [...state.products, action.payload]  
+            if(action.payload.length){
+                const temp = []
+                action.payload.forEach(d => {
+                    if(!state.products.some(e=>{
+                        return e.productID === d.productID
+                        })
+                    ){
+                        temp.push(d)                
+                    }            
+                });
+                return {
+                    ...state,
+                    products: [...state.products, ...temp]  
+                  }
+            }else{
+                if(!state.products.some(e=>{
+                    return e.productID === action.payload.productID
+                    })
+                ){
+                    return {
+                        ...state,
+                        products: [...state.products, action.payload]  
+                      }               
+                }                
             }
+            
         }
 
         case 'product/removeProduct':{
@@ -91,21 +63,3 @@ const productsReducer = (state = initialState, action)=>{
 
 export default productsReducer;
 
-    // {
-    //     productID: 451284,
-    //     group: "Soap",
-    //     name: "Sandoor",
-    //     description: "Sandoor flavour 6'' x 7'' x 3''",
-    //     price: 30,
-    //     instock: 100,
-    //     image: "../../../assets/Products/soap_2.jpg"
-    // },
-    // {
-    //     productID: 659843,
-    //     group: "Cream",
-    //     name: "Honey",
-    //     description: "Honey Flavoured Hair Cream 5ml",
-    //     price: 30,
-    //     instock: 100,
-    //     image: "../../../assets/Products/hair_cream.jpg"
-    // },
