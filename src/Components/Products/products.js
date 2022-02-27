@@ -1,5 +1,7 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { useSelector, useDispatch} from 'react-redux';
+
+import AddEditProductsComponent from './addEditProductsComponent';
 
 import './products.scss';
 import editIcon from '../../../assets/edit_icon.png';
@@ -46,10 +48,9 @@ const ProductsCard = (product) => {
     )
 }
 
-
 export default function Products(){
 
-    //Selector function to select data from store
+    //Selector function and dispatch to control store
     const products = useSelector(state=>state.products.products);
     const dispatch = useDispatch();
 
@@ -57,13 +58,30 @@ export default function Products(){
         dispatch({type:"product/addProduct", payload:productDummydata});
     }
 
+    //state hook for table top position and Add Btn control
+    const [addProductBtnState, setAddProductBtnState] = useState({
+        clickState: false,
+        topPos: "20%"
+    });
+
+    const onAddProductBtnHandler = ()=>{
+        if(!addProductBtnState.clickState){
+            setAddProductBtnState({
+                clickState: true,
+                topPos: "50%"
+            })
+        } else {
+            setAddProductBtnState({
+                clickState: false,
+                topPos: "20%"
+            })
+        }
+    }
+
     return (
         <>  
-            {/* Button to add produts */}
-            <button onClick={()=>onAddProductsHandler()}>
-                + &emsp; &emsp; ADD PRODUCTS
-            </button>
-            <table>
+            <AddEditProductsComponent btnFlag={addProductBtnState.clickState} callBack={onAddProductBtnHandler}/>
+            <table style={{position: "fixed", top: addProductBtnState.topPos}}>
                 <thead>
                     <tr className='product-header'>
                         <th className='column-1'>
