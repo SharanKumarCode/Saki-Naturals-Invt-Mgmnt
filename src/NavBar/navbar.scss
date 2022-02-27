@@ -1,0 +1,46 @@
+#navBarContainer{
+    background-color: #f0f0f0;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+
+    width: 6vw;
+    height: 99vh;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 0px;
+    padding-right: 0px;
+
+    float: left;
+
+}
+
+li{
+    width: 100%;
+    height: 13%;
+
+    padding-top: 10%;
+
+    list-style-type: none;
+    text-decoration: none;
+    text-align: center;
+
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+li:hover{
+    background-color: #233043;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    margin-left: 2px;
+}
+
+span{
+    display: block;
+    margin-top: 10%;
+
+    font-family: 'Righteous';
+    text-transform: uppercase;
+}
