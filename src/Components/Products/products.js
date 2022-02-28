@@ -6,7 +6,6 @@ import AddEditProductsComponent from './addEditProductsComponent';
 import './products.scss';
 import editIcon from '../../../assets/edit_icon.png';
 import productImg from '../../../assets/Products/soap_1.jpg';
-import { Button } from '@mui/material';
 
 const productDummydata = {
         productID: 659843,
