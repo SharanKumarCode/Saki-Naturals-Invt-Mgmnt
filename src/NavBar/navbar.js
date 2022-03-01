@@ -2,9 +2,7 @@ import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 import "./navbar.scss";
 
-import store from '../store/store';
-
- import { MdDashboard, MdPointOfSale, MdSettings } from "react-icons/md";
+ import { MdDashboard, MdPointOfSale, MdSettings, MdPrecisionManufacturing } from "react-icons/md";
  import { BiRupee } from "react-icons/bi";
  import { FaBox } from "react-icons/fa";
 
@@ -15,6 +13,7 @@ import store from '../store/store';
 
 const ICONSTYPE = {
     SALES: "Sales",
+    PRODUCTION: "Production",
     PRODUCTS: "Products",
     DASHBOARD: "Dashboard",
     BILLS: "Bills",
@@ -23,6 +22,7 @@ const ICONSTYPE = {
 
  let iconColor = {
      SalesIconColor: COLORS.MainBg,
+     ProductionIconColor: COLORS.MainBg,
      ProductsIconColor: COLORS.MainBg,
      DashboardIconColor: COLORS.MainBg,
      BillsIconColor: COLORS.MainBg,
@@ -43,6 +43,10 @@ export default function navbar(){
                 setColorState({...iconColor, ProductsIconColor:COLORS.ForeBg})
                 break;
             
+            case ICONSTYPE.PRODUCTION:
+                setColorState({...iconColor, ProductionIconColor:COLORS.ForeBg})
+                break;
+            
             case ICONSTYPE.DASHBOARD:
                 setColorState({...iconColor, DashboardIconColor:COLORS.ForeBg})
                 break;
@@ -58,6 +62,7 @@ export default function navbar(){
             case "Leave":
                 setColorState({...iconColor,
                     SalesIconColor: COLORS.MainBg,
+                    ProductionIconColor: COLORS.MainBg,
                     ProductsIconColor: COLORS.MainBg,
                     DashboardIconColor: COLORS.MainBg,
                     BillsIconColor: COLORS.MainBg,
@@ -73,12 +78,12 @@ export default function navbar(){
     return (
         <ul id='navBarContainer'>
                 <li>
-                    <Link to = "/Sales" style={{textDecoration: "none"}}>
-                        <div className='nav-item'
-                            onMouseEnter={()=>{onHoverHandler(ICONSTYPE.SALES)}} 
+                    <Link to = "/" style={{textDecoration: "none"}}>
+                    <div className='nav-item' 
+                            onMouseEnter={()=>{onHoverHandler(ICONSTYPE.DASHBOARD)}} 
                             onMouseLeave={()=>{onHoverHandler("Leave")}}>
-                                <MdPointOfSale size={"4.5em"} color={colorState.SalesIconColor}/>
-                                <span style={{"color":colorState.SalesIconColor}}>SALES</span>
+                                <MdDashboard size={"4.5em"} color={colorState.DashboardIconColor}/>
+                                <span style={{"color":colorState.DashboardIconColor}}>DASHBOARD</span>
                         </div>
                     </Link>
                 </li>
@@ -93,12 +98,22 @@ export default function navbar(){
                     </Link>
                 </li>
                 <li>
-                    <Link to = "/" style={{textDecoration: "none"}}>
+                    <Link to = "/Production" style={{textDecoration: "none"}}>
                     <div className='nav-item' 
-                            onMouseEnter={()=>{onHoverHandler(ICONSTYPE.DASHBOARD)}} 
+                            onMouseEnter={()=>{onHoverHandler(ICONSTYPE.PRODUCTION)}} 
                             onMouseLeave={()=>{onHoverHandler("Leave")}}>
-                                <MdDashboard size={"4.5em"} color={colorState.DashboardIconColor}/>
-                                <span style={{"color":colorState.DashboardIconColor}}>DASHBOARD</span>
+                                <MdPrecisionManufacturing size={"4.5em"} color={colorState.ProductionIconColor}/>
+                                <span style={{"color":colorState.ProductionIconColor}}>PRODUCTION</span>
+                        </div>
+                    </Link>
+                </li>
+                <li>
+                    <Link to = "/Sales" style={{textDecoration: "none"}}>
+                        <div className='nav-item'
+                            onMouseEnter={()=>{onHoverHandler(ICONSTYPE.SALES)}} 
+                            onMouseLeave={()=>{onHoverHandler("Leave")}}>
+                                <MdPointOfSale size={"4.5em"} color={colorState.SalesIconColor}/>
+                                <span style={{"color":colorState.SalesIconColor}}>SALES</span>
                         </div>
                     </Link>
                 </li>
