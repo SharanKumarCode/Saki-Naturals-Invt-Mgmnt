@@ -1,0 +1,13 @@
+.textSpan{
+    text-transform: none;
+}
+
+.SignInCompClass{
+    animation-name: drop-in;
+    animation-duration: 1s;
+}
+
+@keyframes drop-in {
+    from {transform: translate(0,-6em);}
+    to {transform: translate(0,0);}
+  }

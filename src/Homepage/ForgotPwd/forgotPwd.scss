@@ -1,0 +1,13 @@
+.textSpan{
+    text-transform: none;
+}
+
+.ForgotPwdCompClass{
+    animation-name: drop-below;
+    animation-duration: 1s;
+}
+
+@keyframes drop-below {
+from {transform: translate(0, 10em);}
+to {transform: translate(0,0);}
+}

@@ -2,13 +2,31 @@ const { ipcRenderer, contextBridge } = require("electron")
 
 contextBridge.exposeInMainWorld('electronApi', {
     fetchFirestoreData: (callBack) => {
-            console.log("called preloadjs");
             //ipcRenderer.send('fetch-firestore-data');
             ipcRenderer.on('recv-firestore-data', callBack)
         },
     addProductToFirestore: (data, reduxCallBack) => {
-        console.log("called preloadjs for product data update");
         ipcRenderer.send('add-product-firestore-data', data);
-        ipcRenderer.on('add-product-firestore-data-to-redux', reduxCallBack)
+        ipcRenderer.on('add-product-firestore-data-to-redux', reduxCallBack);
+    },
+    firebaseAuthGetCurrentUser: (reduxCallBack)=>{
+        console.log("checking user - preloadjs")
+        ipcRenderer.send('firebase-auth-current-user');
+        ipcRenderer.on('recv-firebase-auth-current-user', reduxCallBack);
+    },
+    firebaseAuthSigUp: (email, password, name, reduxCallBack)=>{
+        ipcRenderer.send('firebase-auth-signup', email, password, name);
+        ipcRenderer.on('recv-firebase-auth-signup', reduxCallBack);
+    },
+    firebaseAuthSigIn: (email, password, reduxCallBack)=>{
+        ipcRenderer.send('firebase-auth-signin', email, password);
+        ipcRenderer.on('recv-firebase-auth-signin', reduxCallBack);
+    },
+    firebaseAuthSignOut: ()=>{
+        ipcRenderer.send('firebase-auth-signout');
+    },
+    firebaseAuthForgPwd: (email, callback)=>{
+        ipcRenderer.send('firebase-auth-forgot-pwd', email);
+        ipcRenderer.on('recv-firebase-auth-forgot-pwd', callback);
     }
 })

@@ -1,5 +1,10 @@
-const { products } = require('./firebaseHandler/firestoreHandler');
+const { products, productsAdd } = require('./firebaseHandler/firestoreHandler');
+const { firebaseSignUp, firebaseSignIn, firebaseAuthGetCurrentUser } = require('./firebaseHandler/firebaseAuthHandler');
 
 module.exports = {
-    products
+    products,
+    productsAdd,
+    firebaseSignUp,
+    firebaseSignIn,
+    firebaseAuthGetCurrentUser
 }

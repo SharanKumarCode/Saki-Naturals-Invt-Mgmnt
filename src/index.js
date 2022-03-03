@@ -3,11 +3,10 @@ import reactDom from 'react-dom';
 import { Provider } from 'react-redux';
 import store from './store/store';
 
-import HomePage from './Homepage/homepage';
-import MainPage from "./MainPage/mainpage";
+import MainApp from './mainApp';
 
 reactDom.render(
     <Provider store={store}>
-        <MainPage />
+        <MainApp />
     </Provider>, 
     document.getElementById('root'))

@@ -1,20 +1,40 @@
 import React, { useState } from 'react';
+
+import SignInComp from './SignInComp/signIn';
+import SignUpComp from './SignUpComp/signUp';
+import ForgotPasswordComp from './ForgotPwd/forgotPwd';
+
+import Logo from '../../assets/Logo.png'
 import "./homepage.scss";
 
+const COMP_CONSTANTS = {
+    SIGN_IN: "Sign-In",
+    SIGN_UP: "Sign-Up",
+    FORGOT_PASSWORD: "Forgot-Password"
+}
 
 export default function HomePage(){
 
-    const [recvData, setRecvData] = useState("No data received");
+    const [compState, setCompState] = useState(COMP_CONSTANTS.SIGN_IN);
+
+    const setCompStateFunc = (type)=>{
+        setCompState(type)
+    }
+
+    // electronApi.firebaseAuthSigIn("sharankumaraero@gmail.com", "HelloWorld");
+    //electronApi.firebaseAuthSigUp("sharankumaraero@gmail.com", "HelloWorld123");
 
     return (
         <>
-            <div id='homepageContainer'>
-                <div className='homepageButtons'><img style={{"width": "10vw"}} src="E:\Electron\Saki_Naturals\assets\Sales.png" alt='Sales image'/><span>Sales</span></div>
-                <div className='homepageButtons' style={{"margin-top": "5%"}}><img style={{"width": "11vw"}} src="E:\Electron\Saki_Naturals\assets\Products.png" alt='Products image'/><span>Products</span></div>
-                <div className='homepageButtons' style={{"margin-top": "10%"}}><img style={{"width": "11vw"}} src="E:\Electron\Saki_Naturals\assets\Dashboard.png" alt='Dashboard image'/><span>Dashboard</span></div>
-                <div className='homepageButtons' style={{"margin-top": "5%"}}><img style={{"width": "10vw"}} src="E:\Electron\Saki_Naturals\assets\Bills.png" alt='Bills image'/><span>Bills</span></div>
-                <div className='homepageButtons'><img style={{"width": "10vw"}} src="E:\Electron\Saki_Naturals\assets\Settings.png" alt='Settings image'/><span>Settings</span></div>
+            <div className='logoContainer' >
+                <img src={Logo} />
             </div>
+            <div className='credentialContainer'>
+                {
+                    compState === COMP_CONSTANTS.SIGN_IN ? <SignInComp callBack={setCompStateFunc}/> : compState ===  COMP_CONSTANTS.SIGN_UP ? <SignUpComp callBack={setCompStateFunc}/> : <ForgotPasswordComp callBack={setCompStateFunc} />
+                }
+            </div>
+            
         </>
     )
 }

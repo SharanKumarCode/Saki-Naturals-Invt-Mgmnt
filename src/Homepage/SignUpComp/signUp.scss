@@ -1,0 +1,13 @@
+.textSpan{
+    text-transform: none;
+}
+
+.SignUpCompClass{
+    animation-name: slide-in;
+    animation-duration: 1s;
+}
+
+@keyframes slide-in {
+from {transform: translate(-10em, 0);}
+to {transform: translate(0,0);}
+}

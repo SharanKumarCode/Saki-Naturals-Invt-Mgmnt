@@ -1,47 +1,10 @@
-#homepageContainer{
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    margin: auto;
-
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    width: 90vw;
-    height: 50vh;
-
-}
-
-.homepageButtons{
-    width: 15%;
-    height: 40%;
-    flex-grow: 1;
-
-    margin-left: 10px;
-    margin-right: 10px;
-    text-align: center;
-    vertical-align: middle;
-    color: aliceblue;
-
-    cursor: pointer;
-    transition: all 0.3s;
+.logoContainer{
+    position: "absolute";
+    width: "50vw";
+    height: "100vh";
 }
 
 img{
-    height: 20vh;
-}
-
-span{
-    display: block;
-    margin-top: 20%;
-
-    font-family: 'Righteous';
-    text-transform: uppercase;
-}
-
-.homepageButtons:hover{
-    flex-grow: 3;
+    width: 50vw;
+    height: 100%;
 }
