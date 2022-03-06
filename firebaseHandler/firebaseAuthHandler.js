@@ -134,8 +134,10 @@ const firebaseAuthSignIn = (email, password)=>{
 const signOutUser = ()=>{
     signOut(auth).then(() => {
         console.log("User is signed out successfully");
+        currMainWindow.webContents.send('recv-firebase-auth-signout', "success");
       }).catch((error) => {
         console.log(error);
+        currMainWindow.webContents.send('recv-firebase-auth-signout', "error");
       });
 }
 

@@ -22,8 +22,9 @@ contextBridge.exposeInMainWorld('electronApi', {
         ipcRenderer.send('firebase-auth-signin', email, password);
         ipcRenderer.on('recv-firebase-auth-signin', reduxCallBack);
     },
-    firebaseAuthSignOut: ()=>{
+    firebaseAuthSignOut: (callback)=>{
         ipcRenderer.send('firebase-auth-signout');
+        ipcRenderer.on('recv-firebase-auth-signout', callback);
     },
     firebaseAuthForgPwd: (email, callback)=>{
         ipcRenderer.send('firebase-auth-forgot-pwd', email);
